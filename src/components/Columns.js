@@ -19,6 +19,7 @@ var keys = []
 export function Columns(props) {
     const [refs, setRefs] = useState([]) 
     var highest = props.props.highest;
+    var lowish = props.props.lowish;
     
     /**
      * Creates a tracker, a (usually) one line reminder of a value 
@@ -34,9 +35,19 @@ export function Columns(props) {
         return (
             <div className="tracker" id={data.id} key={data.id} background-color={data.color}>
                 <span onClick={() => deleteTracker(data.id)}><FontAwesomeIcon icon={faCircleXmark}/></span>
-                <p> The amount of CO2 at node <span>{data.data.x}</span> at time <span>{data.serieId}</span> is <span>{data.data.y} % mol</span></p>  
+                <p> Mol% at node <span>{data.data.x}</span> at time <span>{data.serieId}</span> is <span>{data.data.y} %</span></p>  
             </div>
         );
+    }
+
+    const Tooltip = (data) => {
+        return(
+            <div id="result" background-color="white">
+                <p>Time: {data.cell.serieId}</p>
+                <p>Node: {data.cell.data.x}</p>
+                <p>mol%: {data.cell.data.y}</p>
+            </div>
+        )
     }
 
     /**
@@ -122,7 +133,7 @@ export function Columns(props) {
                     type: 'diverging',
                     scheme: 'spectral',
                     divergeAt: 0.50,
-                    minValue: .12,
+                    minValue: lowish,
                     maxValue: highest
                 }}
                 emptyColor="#555555"
@@ -152,6 +163,7 @@ export function Columns(props) {
                     }
                 }}
                 hoverTarget="cell"
+                tooltip={Tooltip}
                 animate={false}
             />
 

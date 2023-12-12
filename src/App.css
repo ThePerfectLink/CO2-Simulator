@@ -6,7 +6,8 @@
 body {
   overflow: hidden;
 }
-@media (max-aspect-ratio: 0.99) {
+
+@media (max-aspect-ratio: 1) {
   #results {
     z-index: 10;
     position:absolute;
@@ -38,7 +39,7 @@ body {
   .tracker {
     display: block;
     float: left;
-    font-size: large;
+    font-size: 2.5vw;
     text-align: left;
     margin: 0;
   }
@@ -60,22 +61,25 @@ body {
   
   #extras {
     position: absolute;
-    transform: translate(0, 90vh);
-
+    bottom:0;
+    left:0;
+    height: 10%;
     width: 100vw;
     z-index: 12;
   }
   
   #controls {
     padding-bottom: 7vh;
+    display:inline-flex;
     width: 100%;
+    flex-wrap:nowrap;
     background-color:lightgray;
   }
   
   #controls button {
-    width: 40px;
-    margin: 1%;
-    height: 40px;
+    width: 10%;
+    min-width: 5%;
+    margin: .5%;
     font-size: large;
     background-color: green;
     color: #ffffff;
@@ -90,10 +94,12 @@ body {
   
   #nav {
     display: block;
-    width: 96%;
+    width: 40%;
+    min-width: 20%;
   }
   
   label {
+    background-color: lightgray;
     float:left;
     font-size:large;
     font-family:monospace;
@@ -107,15 +113,30 @@ body {
   #results label{
     font-size: large;
   }
+
+  #result {
+    background-color: lightgrey;
+    height: max-content;
+    width: max-content;
+    font-size: large;
+    text-wrap: nowrap;
+    overflow-x: hidden;
+    text-align: left;
+    padding: 3%;
+  }
+  #result p {
+    margin: 1%;
+  }
 }
 
 @media (min-aspect-ratio: 1) {
   #results {
     z-index: 10;
     position:absolute;
-    transform: translate(19vw, 38vh);
+    bottom: 0;
+    right: 0;
     width:30vw;
-    height: 35vh;
+    height: 30vh;
     overflow-y:auto;
     padding-left: 1vw;
     padding-bottom: 1vh;
@@ -137,13 +158,26 @@ body {
   .tracker {
     display: block;
     float: left;
-    font-size: medium;
+    font-size: 1vw;
     text-align: left;
     margin: 0;
+  }
+    
+  #results {
+    display: inline;
+    background-color:lightgray;
+  }
+  
+  #results label{
+    font-size: large;
   }
   
   #results p {
     text-align: left;
+  }
+
+  #results h6 {
+    margin: 2.5%;
   }
   
   .App-header {
@@ -158,15 +192,21 @@ body {
   }
   
   #extras {
-    width: 30vw;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 40vw;
+    height: 10vh
   }
   
   #controls {
+    padding: .5%;
+    display:inline-flex;
     background-color:lightgray;
   }
   
   #controls button {
-    width: 40px;
+    width: 60px;
     margin: 1%;
     height: 40px;
     font-size: large;
@@ -180,25 +220,37 @@ body {
     background-color: darkgreen;
     color: lightgray;
   }
-  
+
+  #controls p {
+    display: table-cell;
+    font-size: x-large;
+    margin: 10px;
+  }
+
   #nav {
     display: block;
-    width: 99.5%;
+    width: 40%;
+    min-width: 100px;
   }
   
   label {
-    float:left;
+    display: block;
     font-size:large;
     font-family:monospace;
   }
-  
-  #results {
-    display: inline;
-    background-color:lightgray;
-  }
-  
-  #results label{
+
+  #result {
+    background-color: lightgrey;
+    height: max-content;
+    width: max-content;
     font-size: large;
+    text-wrap: nowrap;
+    overflow-x: hidden;
+    text-align: left;
+    padding: 3%;
+  }
+  #result p {
+    margin: 1%;
   }
 }
 
@@ -212,16 +264,16 @@ body {
   }
   
   input[type='range']::-webkit-slider-runnable-track {
-    height: 10px;
+    height: 100%;
     -webkit-appearance: none;
     color: #13bba4;
     margin-top: -1px;
   }
   
   input[type='range']::-webkit-slider-thumb {
-    width: 10px;
+    width: 15%;
     -webkit-appearance: none;
-    height: 10px;
+    height: 110%;
     cursor: ew-resize;
     background: lightgreen;
     box-shadow: -60vw 0 0 60vw green;

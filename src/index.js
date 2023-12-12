@@ -26,7 +26,7 @@ async function makeFile() {
         step: row => {
           conData.push(row.data)
         },
-        complete: result => {
+        complete: () => {
           for(let i = 0; i < timeData.length; i++) {
             conData[i].unshift(timeData[i][0]);
           }
@@ -52,6 +52,7 @@ function formatArray(data) {
   let props = {
     arr: [],
     highest: 0,
+    lowish: 0.14
   };
   for(let i = 1; i<data.length; i++) {
     props.arr.push([]);
@@ -63,6 +64,7 @@ function formatArray(data) {
       props.arr[i-1][0].data[j-1].x = data[0][j].toString();
       props.arr[i-1][0].data[j-1].y = parseFloat(data[i][j]);
       if(parseFloat(data[i][j]) > props.highest) { props.highest = parseFloat(data[i][j]) }
+      if(parseFloat(data[i][j]) < props.lowish && parseFloat(data[i][j]) > 0.06) { props.lowish = parseFloat(data[i][j]) }
     }
   }
   start(props)
