@@ -1,6 +1,6 @@
 import './App.css';
 import { Columns } from './components/Columns.js';
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 
 
 /**
@@ -16,8 +16,13 @@ function App(props) {
   const navBar = useRef(null);
   const [frame, setFrame] = useState(0);
   const [key, setKey] = useState(0);
+  const [fpsState, setFpsState] = useState(30);
   const playing = useRef(null);
   const animation = useRef(null);
+  const latestFPS = useRef(fpsState);
+  const latestKey = useRef(key);
+  var start, now, elapsed, fpsInterval;
+  
 
   var conf = {
     data: props.props.arr,
@@ -27,10 +32,14 @@ function App(props) {
     height: window.innerHeight*.4,
   }
 
+  useEffect(() => {
+    latestFPS.current = fpsState;
+    latestKey.current = key;
+  })
   /**
    * Detects DOM changes and sets new detected dimensions
    */
-  React.useEffect(() => {
+  useEffect(() => {
     function handleResize() {
       setDimensions({
         height: window.innerHeight,
@@ -42,7 +51,6 @@ function App(props) {
       window.removeEventListener('resize', handleResize)
     }
   })
-  
   /**
    * Sets integer as navBar value
    * @param {Number} frame takes an integer as a frame index
@@ -59,7 +67,7 @@ function App(props) {
     playing.current = false;
     cancelAnimationFrame(animation.current)
     if(key < conf.data.length - 1) {
-      setKey(prevKey => prevKey + 1);
+      increaseKey();
       updateFrame(key);
     } else {
       beginning();
@@ -107,31 +115,52 @@ function App(props) {
     cancelAnimationFrame(animation.current)
     if(!playing.current) {
       playing.current = true;
-      animate(key);
+      start = Date.now()
+      animate();
     } else {
       playing.current = false;
     }
   };
+
+  const increaseKey = () => {
+    const inputElement = navBar.current;
+    inputElement.value = frame;
+    setKey(prevKey => prevKey + 1);
+  }
+
+  const increaseFPS = () => {
+    setFpsState(prevFPS => prevFPS + 5);
+  }
+
+  const lowerFPS = () => {
+    setFpsState(prevFPS => prevFPS - 5);
+  }
 
   /**
    * Main animation loop. This takes the current frame and adds one. From there 
    * it updates the DOM and calls the next animation loop.
    * @param {Number} currentKey 
    */
-  const animate = (currentKey) => {
-    if(currentKey < conf.data.length - 1) {
-      animation.current = requestAnimationFrame(() => {
-        setKey(prevKey => prevKey + 1);
-        updateFrame(currentKey+1);
-        animate(currentKey+1);
-      });
-    } else {
-      animation.current = requestAnimationFrame(() => {
-        setKey(0);
-        updateFrame(0);
-        animate(0);
-      });
-    }
+  const animate = () => {
+    fpsInterval = 1000/latestFPS.current;
+    animation.current = requestAnimationFrame(() => {
+      animate();
+      now = Date.now()
+      elapsed = now-start
+      if(latestKey.current < conf.data.length - 2) {
+        if (elapsed > fpsInterval) {
+          increaseKey()
+          updateFrame(latestKey.current+1);
+          start = now - (elapsed % fpsInterval);
+        }
+      } else {
+        if (elapsed > fpsInterval) {
+          setKey(0);
+          updateFrame(0);
+          start = now - (elapsed % fpsInterval);
+        }
+      }
+    });
   }
 
   return (
@@ -164,6 +193,19 @@ function App(props) {
             <button onClick={
               end
             }> {"≫∣"} </button>
+            <div id="speed">
+              <button onClick={() => {
+                if(fpsState < 30) {
+                  increaseFPS()
+                }  
+              }}> ^ </button>
+              <button onClick={() => {
+                if(fpsState > 5) {
+                  lowerFPS()
+                }  
+              }}> v </button>
+              <p> {(fpsState/15).toFixed(2)}X </p>
+            </div>
           </div> 
         </div>
       </header>

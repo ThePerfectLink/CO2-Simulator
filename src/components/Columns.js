@@ -73,7 +73,7 @@ export function Columns(props) {
                 data = {
                     props.props.data[props.props.current]
                 }
-                margin={{ top: width*0.035, right: 12, bottom: width*0.035, left: 12 }}
+                margin={{ top: width*0.035+5, right: 12, bottom: width*0.03+12, left: 12 }}
                 valueFormat=">-.6~c"
                 width={width}
                 height = {height}
@@ -90,7 +90,7 @@ export function Columns(props) {
                         },
                         legend: {
                             text: {
-                                fontSize: 0.016*width,
+                                fontSize: 0.02*width,
                                 fill: "black"
                             }
                         }
@@ -98,13 +98,13 @@ export function Columns(props) {
                     legends: {
                         ticks: {
                           text: {
-                            fontSize: 0.014*width,
+                            fontSize: 0.01*width+4,
                             strokeWidth: .8,
                           },
                         },
                         title: {
                             text: {
-                              fontSize: 0.012*width,
+                              fontSize: 0.012*width+4,
                               fill: "black"
                             }
                         }
@@ -112,9 +112,9 @@ export function Columns(props) {
                 }}
                 axisTop={{
                     tickSize: width*0.003,
-                    tickPadding: 1,
+                    tickPadding: 2,
                     legend: 'Axial Length (i.e., Nodes/Finite Volumes)',
-                    legendOffset: -width*0.026,
+                    legendOffset: -width*0.03,
                     legendPosition: "start"
                 }}
                 axisLeft={null}
@@ -130,17 +130,17 @@ export function Columns(props) {
                     {
                         anchor: 'bottom-left',
                         enableLabels: false,
-                        translateX: 20,
-                        translateY: width*0.023,
-                        length: width*.6,
+                        translateX: width*0.018,
+                        translateY: width*0.021+4,
+                        length: width*.7,
                         thickness: width*0.007,
                         direction: 'row',
                         tickPosition: 'before',
-                        tickSize: width*0.002,
+                        tickSize: width*0.001,
                         tickSpacing: 4,
                         tickOverlap: false,
                         tickFormat: '>-.3a',
-                        title: 'Concentration',
+                        title: 'CO2 Front (mol%)',
                         titleAlign: 'start',
                         titleOffset: 4
                     },
