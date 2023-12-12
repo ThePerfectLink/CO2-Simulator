@@ -1,38 +1,244 @@
 .App {
   text-align: center;
+  overflow: hidden;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  overflow: hidden;
 }
+@media (max-aspect-ratio: 0.99) {
+  #results {
+    z-index: 10;
+    position:absolute;
+    transform: translate(0, 40.0vh);
+    width:49vw;
+    height: 58.5vh;
+    overflow-y: auto;
+    padding-left: 1vw;
+    padding-bottom: 1vh;
+  }
+  
+  #heatmap {
+    width: 100%;
+  }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+  .tracker svg {
+    cursor: pointer;
+    display:inline;
+  }
+  
+  #results p {
+    display:inline;
+  }
+  
+  span {
+    font-weight: 500;
+  }
+  
+  .tracker {
+    display: block;
+    float: left;
+    font-size: large;
+    text-align: left;
+    margin: 0;
+  }
+  
+  #results p {
+    text-align: left;
+  }
+  
+  .App-header {
+    background-color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    font-size: calc(10px + 2vmin);
+    color: rgb(17, 16, 16);
+  }
+  
+  #extras {
+    position: absolute;
+    transform: translate(0, 90vh);
+
+    width: 100vw;
+    z-index: 12;
+  }
+  
+  #controls {
+    padding-bottom: 7vh;
+    width: 100%;
+    background-color:lightgray;
+  }
+  
+  #controls button {
+    width: 40px;
+    margin: 1%;
+    height: 40px;
+    font-size: large;
+    background-color: green;
+    color: #ffffff;
+    border: 0;
+  }
+  
+  #controls button:hover {
+    cursor: pointer;
+    background-color: darkgreen;
+    color: lightgray;
+  }
+  
+  #nav {
+    display: block;
+    width: 99.5%;
+  }
+  
+  label {
+    float:left;
+    font-size:large;
+    font-family:monospace;
+  }
+  
+  #results {
+    display: inline;
+    background-color:lightgray;
+  }
+  
+  #results label{
+    font-size: large;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+@media (min-aspect-ratio: 1) {
+  #results {
+    z-index: 10;
+    position:absolute;
+    transform: translate(19vw, 38vh);
+    width:30vw;
+    height: 35vh;
+    overflow-y:auto;
+    padding-left: 1vw;
+    padding-bottom: 1vh;
+  }
+  
+  .tracker svg {
+    cursor: pointer;
+    display:inline;
+  }
+  
+  #results p {
+    display:inline;
+  }
+  
+  span {
+    font-weight: 500;
+  }
+  
+  .tracker {
+    display: block;
+    float: left;
+    font-size: medium;
+    text-align: left;
+    margin: 0;
+  }
+  
+  #results p {
+    text-align: left;
+  }
+  
+  .App-header {
+    background-color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: rgb(17, 16, 16);
+  }
+  
+  #extras {
+    width: 30vw;
+  }
+  
+  #controls {
+    background-color:lightgray;
+  }
+  
+  #controls button {
+    width: 40px;
+    margin: 1%;
+    height: 40px;
+    font-size: large;
+    background-color: green;
+    color: #ffffff;
+    border: 0;
+  }
+  
+  #controls button:hover {
+    cursor: pointer;
+    background-color: darkgreen;
+    color: lightgray;
+  }
+  
+  #nav {
+    display: block;
+    width: 99.5%;
+  }
+  
+  label {
+    float:left;
+    font-size:large;
+    font-family:monospace;
+  }
+  
+  #results {
+    display: inline;
+    background-color:lightgray;
+  }
+  
+  #results label{
+    font-size: large;
+  }
 }
 
-.App-link {
-  color: #61dafb;
-}
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  input[type='range'] {
+    overflow: hidden;
+    width: 80px;
+    -webkit-appearance: none;
+    background-color: white;
   }
-  to {
-    transform: rotate(360deg);
+  
+  input[type='range']::-webkit-slider-runnable-track {
+    height: 10px;
+    -webkit-appearance: none;
+    color: #13bba4;
+    margin-top: -1px;
   }
+  
+  input[type='range']::-webkit-slider-thumb {
+    width: 10px;
+    -webkit-appearance: none;
+    height: 10px;
+    cursor: ew-resize;
+    background: lightgreen;
+    box-shadow: -60vw 0 0 60vw green;
+  }
+
+}
+/** FF*/
+input[type="range"]::-moz-range-progress {
+  background-color: green; 
+}
+input[type="range"]::-moz-range-track {  
+  background-color: white;
+}
+/* IE*/
+input[type="range"]::-ms-fill-lower {
+  background-color: green; 
+}
+input[type="range"]::-ms-fill-upper {  
+  background-color: white;
 }
