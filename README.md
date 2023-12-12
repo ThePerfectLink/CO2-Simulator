@@ -12,7 +12,7 @@ In the project directory, you can run:
 
 ### `npm install`
 
-Install's all required node dependencies, paramount that you start with this.
+Installs all required node dependencies, paramount that you start with this.
 
 ### `npm start`
 
