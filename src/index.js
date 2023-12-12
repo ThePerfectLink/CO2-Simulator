@@ -15,13 +15,13 @@ var conData = [];
  *located in the data folder in public
  */
 async function makeFile() {
-  Papa.parse("http://localhost:3000/data/time.csv", {
+  Papa.parse("./data/time.csv", {
     download: true,
     step: row => {
       timeData.push(row.data)
     },
     complete: re => {
-      Papa.parse("http://localhost:3000/data/concentration.csv", {
+      Papa.parse("./data/concentration.csv", {
         download: true,
         step: row => {
           conData.push(row.data)
