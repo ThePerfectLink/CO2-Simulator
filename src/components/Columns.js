@@ -3,12 +3,29 @@ import React, {useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 
+/**
+ * Keys are used to help keep track of columns which have been
+ * added to the tracker. These are probably redundant.
+ */
 var keys = []
 
+/**
+ * Takes an object containing properly formatted data, the highest
+ * concentration, current window dimensions, and the current frame.
+ * This is all in service of making a nivo heatmap.
+ * @param {Object} props Object containing the aforementioned data
+ * @returns the heatmap and the tracking system
+ */
 export function Columns(props) {
     const [refs, setRefs] = useState([]) 
     var highest = props.props.highest;
-
+    
+    /**
+     * Creates a tracker, a (usually) one line reminder of a value 
+     * at a specific column and time stamp.
+     * @param {Object} data is an object containing a whole host of information regarding the cell clicked
+     * @returns a new div that keeps note of the cell the user has clicked on
+     */
     const createTracker = (data) => {
         if(keys.includes(data.id)) {
             return ;
@@ -17,11 +34,15 @@ export function Columns(props) {
         return (
             <div className="tracker" id={data.id} key={data.id} background-color={data.color}>
                 <span onClick={() => deleteTracker(data.id)}><FontAwesomeIcon icon={faCircleXmark}/></span>
-                <p> Concentration at column <span>{data.data.x}</span> at time <span>{data.serieId}</span> is equal to <span>{data.data.y}</span></p>  
+                <p> The amount of CO2 at node <span>{data.data.x}</span> at time <span>{data.serieId}</span> is <span>{data.data.y} % mol</span></p>  
             </div>
         );
     }
 
+    /**
+     * deletes a column tracker given by the id
+     * @param {String} id is a string generated alongside the tracker
+     */
     function deleteTracker(id) {
         var index = keys.indexOf(id);
         if (index > -1) {
@@ -38,13 +59,14 @@ export function Columns(props) {
         });
         setRefs(prevRefs => [...prevRefs])
     }
+
     var height = props.props.height;
     var width = props.props.width;
 
     return (
         <div id="heatmap">
             <div id="results">
-                <h6>Tracked Columns</h6>
+                <h6>Tracked Points</h6>
                 {refs}
             </div>
             <HeatMap 

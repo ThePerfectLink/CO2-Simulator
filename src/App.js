@@ -1,30 +1,18 @@
-//import logo from './logo.svg';
 import './App.css';
 import { Columns } from './components/Columns.js';
 import React, {useState, useRef} from 'react';
 
+
+/**
+ * Main component of app, contains function for controlling animation
+ * @param {Object} props contains data and highest concentration
+ * @returns all elements in the webpage
+ */
 function App(props) {
   const [dimensions, setDimensions] = React.useState({ 
     height: window.height,
     width: window.width
-  })
-
-  
-  React.useEffect(() => {
-    function handleResize() {
-      setDimensions({
-        height: window.innerHeight,
-        width: window.innerWidth
-      })
-    
-  }
-    window.addEventListener('resize', handleResize)
-    return _ => {
-      window.removeEventListener('resize', handleResize)
-    
-    }
-  })
-
+  });
   const navBar = useRef(null);
   const [frame, setFrame] = useState(0);
   const [key, setKey] = useState(0);
@@ -38,23 +26,49 @@ function App(props) {
     width: window.innerWidth*1,
     height: window.innerHeight*.4,
   }
+
+  /**
+   * Detects DOM changes and sets new detected dimensions
+   */
+  React.useEffect(() => {
+    function handleResize() {
+      setDimensions({
+        height: window.innerHeight,
+        width: window.innerWidth
+      })
+  }
+    window.addEventListener('resize', handleResize)
+    return _ => {
+      window.removeEventListener('resize', handleResize)
+    }
+  })
   
+  /**
+   * Sets integer as navBar value
+   * @param {Number} frame takes an integer as a frame index
+   */
   const updateFrame = (frame) => {
     const inputElement = navBar.current;
     inputElement.value = frame;
     setFrame(frame)
   }
-
+  /**
+   * Steps one frame forward
+   */
   const aheadOne = () => {
     playing.current = false;
     cancelAnimationFrame(animation.current)
-    if(key < 347) {
+    if(key < conf.data.length - 1) {
       setKey(prevKey => prevKey + 1);
       updateFrame(key);
     } else {
       beginning();
     }
   };
+
+  /**
+   * Steps one frame back
+   */
   const backOne = () => {
     playing.current = false;
     cancelAnimationFrame(animation.current)
@@ -64,18 +78,31 @@ function App(props) {
     }
     console.log(dimensions)
   };
+
+  /**
+   * Returns to first frame
+   */
   const beginning = () => {
     playing.current = false;
     cancelAnimationFrame(animation.current)
     setKey(0);
     updateFrame(0);
   };
+
+  /**
+   * Goes to final frame
+   */
   const end = () => {
     playing.current = false;
     cancelAnimationFrame(animation.current)
-    setKey(347);
-    updateFrame(347);
+    setKey(conf.data.length-1);
+    updateFrame(conf.data.length-1);
   };
+
+  /**
+   * Progresses through all frames and repeats upon hitting the end.
+   * Frames progress at fastest possible animation rate.
+   */
   const play = () => {
     cancelAnimationFrame(animation.current)
     if(!playing.current) {
@@ -85,8 +112,14 @@ function App(props) {
       playing.current = false;
     }
   };
+
+  /**
+   * Main animation loop. This takes the current frame and adds one. From there 
+   * it updates the DOM and calls the next animation loop.
+   * @param {Number} currentKey 
+   */
   const animate = (currentKey) => {
-    if(currentKey < 347) {
+    if(currentKey < conf.data.length - 1) {
       animation.current = requestAnimationFrame(() => {
         setKey(prevKey => prevKey + 1);
         updateFrame(currentKey+1);
@@ -100,7 +133,6 @@ function App(props) {
       });
     }
   }
-
 
   return (
     <div className="App">

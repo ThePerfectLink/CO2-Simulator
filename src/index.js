@@ -11,8 +11,10 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 var timeData = [];
 var conData = [];
 
-
-
+/**
+ * Creates usable data from a time and concentration csv
+ *located in the data folder in public
+ */
 async function makeFile() {
   Papa.parse("http://localhost:3000/data/time.csv", {
     download: true,
@@ -41,6 +43,12 @@ async function makeFile() {
 
 }
 
+/**
+ * Takes data gathered from CSVs and formats them in 
+ * object from so that it's readable by nivo heatmap.
+ * Also finds the highest concentration in data set.
+ * @param {Array} data 2d array of data
+ */
 function formatArray(data) {
   let props = {
     arr: [],
@@ -63,7 +71,11 @@ function formatArray(data) {
 
 makeFile();
 
-
+/**
+ * Starts main React Component, takes data required
+ * for the heatmap
+ * @param {Object} data Object with array of data and highest concentration in data set
+ */
 function start(data) {
   root.render(
     <React.StrictMode>
