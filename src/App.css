@@ -13,7 +13,7 @@ body {
     position:absolute;
     transform: translate(0, 45.0vh);
     width:49vw;
-    height: 58.5vh;
+    height: 50vh;
     overflow-y: auto;
     padding-left: 1vw;
     padding-bottom: 1vh;
@@ -65,10 +65,10 @@ body {
     display: block;
     position: absolute;
     left: 0;
-    bottom: 0vh;
+    bottom: 8vh;
     overflow-y: scroll;
-    max-width: 69vw;
-    max-height: 55vh;
+    max-width: 50vw;
+    max-height: 47vh;
   }
 
   table, th, td {
