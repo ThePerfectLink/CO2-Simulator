@@ -143,7 +143,7 @@ export function Columns(props) {
                         enableLabels: false,
                         translateX: width*0.018,
                         translateY: width*0.021+4,
-                        length: width*.7,
+                        length: width*.5,
                         thickness: width*0.007,
                         direction: 'row',
                         tickPosition: 'before',

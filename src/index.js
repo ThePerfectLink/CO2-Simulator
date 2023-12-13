@@ -51,6 +51,7 @@ async function makeFile() {
 function formatArray(data) {
   let props = {
     arr: [],
+    data: data,
     highest: 0,
     lowish: 0.14
   };

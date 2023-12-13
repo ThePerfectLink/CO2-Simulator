@@ -1,5 +1,6 @@
 import './App.css';
 import { Columns } from './components/Columns.js';
+import { Datatable } from './components/Datatable.js';
 import React, {useState, useRef, useEffect} from 'react';
 
 
@@ -164,9 +165,16 @@ function App(props) {
   return (
     <div className="App">
       <header className="App-header">
-        <Columns
-          props = {conf}
-        />
+        <div id="map">
+          <Columns
+            props = {conf}
+          />
+        </div>
+        <div id="table">
+          <Datatable 
+            props = {props.props.data}
+          />
+        </div>
         <div id="extras">
           <label>{conf.data[key][0].id}</label>
           <div id="controls">
