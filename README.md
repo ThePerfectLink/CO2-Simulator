@@ -38,8 +38,8 @@ Note: You may need elevated rights, try `npm install -g serve` if other command 
 
 ### `serve -s build`
 
-Once Serve is installed, you can run this to deploy the app optimally, you can view it from [http://localhost:3000].
+Once Serve is installed, you can run this to deploy the app optimally, you can view it from [http://localhost:3000](http://localhost:3000).
 
-## If build process fails, or you're lazy
+## If build process fails or you're lazy
 
 Just run `npm start` and try it from there.
