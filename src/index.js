@@ -39,7 +39,6 @@ async function makeFile() {
       });
     }
   });
-
 }
 
 /**
@@ -51,6 +50,7 @@ async function makeFile() {
 function formatArray(data) {
   let props = {
     arr: [],
+    arrRev: [],
     data: data,
     highest: 0,
     lowish: 0.14
@@ -62,7 +62,7 @@ function formatArray(data) {
     props.arr[i-1][0].data = [];
     for(let j = 1; j<data[i].length; j++) {
       props.arr[i-1][0].data.push({});
-      props.arr[i-1][0].data[j-1].x = data[0][j].toString();
+      props.arr[i-1][0].data[j-1].x = data[0][j];
       props.arr[i-1][0].data[j-1].y = parseFloat(data[i][j]);
       if(parseFloat(data[i][j]) > props.highest) { props.highest = parseFloat(data[i][j]) }
       if(parseFloat(data[i][j]) < props.lowish && parseFloat(data[i][j]) > 0.06) { props.lowish = parseFloat(data[i][j]) }

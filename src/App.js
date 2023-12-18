@@ -49,7 +49,7 @@ function App(props) {
         height: window.innerHeight,
         width: window.innerWidth
       })
-  }
+    }
     window.addEventListener('resize', handleResize)
     return _ => {
       window.removeEventListener('resize', handleResize)
@@ -87,7 +87,7 @@ function App(props) {
    */
   const beginning = () => {
     playing.current = false;
-    cancelAnimationFrame(animation.current)
+    cancelAnimationFrame(animation.current);
     inputElement = navBar.current;
     inputElement.value = 0;
     setKey(0);
@@ -133,7 +133,7 @@ function App(props) {
   const lowerFPS = () => {
     setFpsState(prevFPS => prevFPS - 5);
   }
-
+  
   /**
    * Main animation loop. This takes the current frame and adds one. From there 
    * it updates the DOM and calls the next animation loop.
@@ -161,12 +161,17 @@ function App(props) {
       }
     });
   }
-
+  
   return (
     <div className="App">
       <header className="App-header">
         <div id="map">
           <Columns
+            props = {conf}
+          />
+        </div>
+        <div>
+          <Scatter 
             props = {conf}
           />
         </div>
@@ -201,15 +206,15 @@ function App(props) {
             
             <button onClick={() => {
               if(fpsState < 30) {
-                increaseFPS()
+                increaseFPS();
               }  
-              }}> ^ </button>
+              }}> ▲ </button>
               <p> {(fpsState/15).toFixed(2)}X </p>
             <button onClick={() => {
               if(fpsState > 5) {
                 lowerFPS()
               }  
-            }}> v </button>
+            }}> ▼ </button>
           </div> 
         </div>
       </header>

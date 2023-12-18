@@ -78,6 +78,11 @@ body {
     border-spacing: 0px 0;
     border: 1px solid;
   }
+
+  th:hover, td:hover {
+    cursor: pointer;
+    background-color: aliceblue;
+  }
   
   #extras {
     position: absolute;
@@ -237,6 +242,11 @@ body {
     border: 1px solid;
   }
   
+  th:hover, td:hover {
+    cursor: pointer;
+    background-color:lightblue;
+  }
+
   #extras {
     position: absolute;
     right: 0;
